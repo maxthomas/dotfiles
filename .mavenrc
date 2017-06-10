@@ -1,0 +1,3 @@
+alias mvnj='mvn clean compile assembly:single'
+alias mvni='mvn clean install'
+alias mvnt='mvn clean test'

@@ -1,0 +1,24 @@
+ Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
+        , bgColor = "black"
+        , fgColor = "grey"
+        , position = TopW L 90
+        , border = BottomB
+        , commands = [ Run Weather "scrubbed" ["-t"," <tempC>°C","-L","16","-H","23","--normal","green","--high","red","--low","lightblue"] 3600
+                     , Run MultiCpu ["-L", "50", "-H", "85", "--low", "green", "--normal", "orange", "--high", "red"] 10
+                     , Run DynNetwork [ "--template" , "<dev>: <tx>kB/s|<rx>kB/s"
+                                      , "--Low"      , "1000"       -- units: kB/s
+                                      , "--High"     , "5000"       -- units: kB/s
+                                      , "--low"      , "green"
+                                      , "--normal"   , "orange"
+                                      , "--high"     , "red"
+                                      ] 10
+                     , Run Memory ["-t","Mem: <usedratio>%"] 10
+                     , Run Date "%a %b %_d %l:%M" "date" 10
+                     , Run StdinReader
+                     ]
+        , sepChar = "%"
+        , alignSep = "}{"
+        , template = "%StdinReader% }{ %multicpu% | %memory% | %dynnetwork%          %scrubbed% | <fc=#ee9a00>%date%</fc>"
+        }
+ 
+-- , Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
